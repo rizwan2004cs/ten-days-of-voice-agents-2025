@@ -1,0 +1,201 @@
+nohup: ignoring input
+    23:42:40 DEBUG  asyncio          Using proactor: IocpProactor  
+             DEV    livekit.agents   Watching C:\voice AI                      
+                                     Challenge\ten-days-of-voice-agents-2025\  
+                                     backend\src                               
+    23:42:47 DEBUG  asyncio          Using proactor: IocpProactor  
+             INFO   livekit.agents   starting worker {"version": "1.3.2",      
+                                                     "rtc-version": "1.0.19"}  
+             INFO   livekit.agents   starting inference executor  
+             INFO   livekit.agents   initializing process {"pid": 10552,       
+                                                          "inference": true}   
+    23:43:03 INFO   livekit.agents   process initialized {"pid": 10552,        
+                                                         "inference": true,    
+                                                         "elapsed_time": 15.49}
+             INFO   livekit.agents   registered worker {"agent_name": "", "id":
+                                                       "AW_356G7PszNU49",      
+                                                       "url":                  
+                                                       "ws://localhost:7880",  
+                                                       "region": "",           
+                                                       "protocol": 16}         
+Process agents_inference_process:
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\windows_events.py", line 463, in finish_socket_func
+    return ov.getresult()
+           ~~~~~~~~~~~~^^
+OSError: [WinError 64] The specified network name is no longer available
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\voice AI Challenge\ten-days-of-voice-agents-2025\backend\.venv\Lib\site-packages\livekit\agents\utils\aio\duplex_unix.py", line 57, in aclose
+    await self._writer.wait_closed()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\streams.py", line 358, in wait_closed
+    await self._protocol._get_close_waiter(self)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\windows_events.py", line 804, in _poll
+    value = callback(transferred, key, ov)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\windows_events.py", line 467, in finish_socket_func
+    raise ConnectionResetError(*exc.args)
+ConnectionResetError: [WinError 64] The specified network name is no longer available
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\multiprocessing\process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\voice AI Challenge\ten-days-of-voice-agents-2025\backend\.venv\Lib\site-packages\livekit\agents\ipc\inference_proc_lazy_main.py", line 45, in proc_main
+    client.run()
+    ~~~~~~~~~~^^
+  File "C:\voice AI Challenge\ten-days-of-voice-agents-2025\backend\.venv\Lib\site-packages\livekit\agents\ipc\proc_client.py", line 70, in run
+    loop.run_until_complete(self._task)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\voice AI Challenge\ten-days-of-voice-agents-2025\backend\.venv\Lib\site-packages\livekit\agents\ipc\proc_client.py", line 145, in _monitor_task
+    await self._acch.aclose()
+  File "C:\voice AI Challenge\ten-days-of-voice-agents-2025\backend\.venv\Lib\site-packages\livekit\agents\utils\aio\duplex_unix.py", line 60, in aclose
+    raise DuplexClosed() from e
+livekit.agents.utils.aio.duplex_unix.DuplexClosed
+    23:55:51 DEBUG  asyncio          Using proactor: IocpProactor  
+             INFO   livekit.agents   starting worker {"version": "1.3.2",      
+                                                     "rtc-version": "1.0.19"}  
+             INFO   livekit.agents   starting inference executor  
+    23:55:51 ERROR  livekit.agents   Error in _read_ipc_task                   
+                                     Traceback (most recent call last):        
+                                       File "C:\voice AI                       
+                                     Challenge\ten-days-of-voice-agents-2025\  
+                                     backend\.venv\Lib\site-packages\livekit\  
+                                     agents\utils\aio\duplex_unix.py", line    
+                                     35, in recv_bytes                         
+                                         len_bytes = await                     
+                                     self._reader.readexactly(4)               
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^  
+                                     ^^^^^^^^^                                 
+                                       File "C:\Program                        
+                                     Files\WindowsApps\PythonSoftwareFoundati  
+                                     on.Python.3.13_3.13.2544.0_x64__qbz5n2kf  
+                                     ra8p0\Lib\asyncio\streams.py", line 767,  
+                                     in readexactly                            
+                                         raise                                 
+                                     exceptions.IncompleteReadError(incomplet  
+                                     e, n)                                     
+                                     asyncio.exceptions.IncompleteReadError:   
+                                     0 bytes read on a total of 4 expected     
+                                     bytes                                     
+                                                                               
+                                     The above exception was the direct cause  
+                                     of the following exception:               
+                                                                               
+                                     Traceback (most recent call last):        
+                                       File "C:\voice AI                       
+                                     Challenge\ten-days-of-voice-agents-2025\  
+                                     backend\.venv\Lib\site-packages\livekit\  
+                                     agents\utils\log.py", line 16, in         
+                                     async_fn_logs                             
+                                         return await fn(*args, **kwargs)      
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^      
+                                       File "C:\voice AI                       
+                                     Challenge\ten-days-of-voice-agents-2025\  
+                                     backend\.venv\Lib\site-packages\livekit\  
+                                     agents\cli\watcher.py", line 135, in      
+                                     _read_ipc_task                            
+                                         msg = await                           
+                 INFO   livekit.agents   initializing process {"pid": 5388,                 
+                                                                 "inference": true}   
+                 channel.arecv_message(self._pch,          
+                                     proto.IPC_MESSAGES)                       
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^              
+                                       File "C:\voice AI                       
+                                     Challenge\ten-days-of-voice-agents-2025\  
+                                     backend\.venv\Lib\site-packages\livekit\  
+                                     agents\ipc\channel.py", line 47, in       
+                                     arecv_message                             
+                                         return _read_message(await            
+                                     dplx.recv_bytes(), messages)              
+                                                              ^^^^^^^^^^^^^^^  
+                                     ^^^^^^^^                                  
+                                       File "C:\voice AI                       
+                                     Challenge\ten-days-of-voice-agents-2025\  
+                                     backend\.venv\Lib\site-packages\livekit\  
+                                     agents\utils\aio\duplex_unix.py", line    
+                                     43, in recv_bytes                         
+                                         raise DuplexClosed() from e           
+                                     livekit.agents.utils.aio.duplex_unix.Dup  
+                                     lexClosed                                 
+    23:56:15 INFO   livekit.agents   process initialized {"pid": 5388,         
+                                                         "inference": true,    
+                                                         "elapsed_time": 24.37}
+             INFO   livekit.agents   registered worker {"agent_name": "", "id":
+                                                       "AW_t4NWnh35P2hp",      
+                                                       "url":                  
+                                                       "ws://localhost:7880",  
+                                                       "region": "",           
+                                                       "protocol": 16}         
+Process agents_inference_process:
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\windows_events.py", line 463, in finish_socket_func
+    return ov.getresult()
+           ~~~~~~~~~~~~^^
+OSError: [WinError 64] The specified network name is no longer available
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\voice AI Challenge\ten-days-of-voice-agents-2025\backend\.venv\Lib\site-packages\livekit\agents\utils\aio\duplex_unix.py", line 57, in aclose
+    await self._writer.wait_closed()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\streams.py", line 358, in wait_closed
+    await self._protocol._get_close_waiter(self)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\windows_events.py", line 804, in _poll
+    value = callback(transferred, key, ov)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\windows_events.py", line 467, in finish_socket_func
+    raise ConnectionResetError(*exc.args)
+ConnectionResetError: [WinError 64] The specified network name is no longer available
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\multiprocessing\process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\multiprocessing\process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\voice AI Challenge\ten-days-of-voice-agents-2025\backend\.venv\Lib\site-packages\livekit\agents\ipc\inference_proc_lazy_main.py", line 45, in proc_main
+    client.run()
+    ~~~~~~~~~~^^
+  File "C:\voice AI Challenge\ten-days-of-voice-agents-2025\backend\.venv\Lib\site-packages\livekit\agents\ipc\proc_client.py", line 70, in run
+    loop.run_until_complete(self._task)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.2544.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\voice AI Challenge\ten-days-of-voice-agents-2025\backend\.venv\Lib\site-packages\livekit\agents\ipc\proc_client.py", line 145, in _monitor_task
+    await self._acch.aclose()
+  File "C:\voice AI Challenge\ten-days-of-voice-agents-2025\backend\.venv\Lib\site-packages\livekit\agents\utils\aio\duplex_unix.py", line 60, in aclose
+    raise DuplexClosed() from e
+livekit.agents.utils.aio.duplex_unix.DuplexClosed
+    23:56:51 DEBUG  asyncio          Using proactor: IocpProactor  
+             INFO   livekit.agents   starting worker {"version": "1.3.2",      
+                                                     "rtc-version": "1.0.19"}  
+             INFO   livekit.agents   starting inference executor  
+             INFO   livekit.agents   initializing process {"pid": 16816,       
+                                                          "inference": true}   
+    23:57:13 INFO   livekit.agents   process initialized {"pid": 16816,        
+                                                         "inference": true,    
+                                                         "elapsed_time": 22.33}
+             INFO   livekit.agents   registered worker {"agent_name": "", "id":
+                                                       "AW_c3coVJx9MrQh",      
+                                                       "url":                  
+                                                       "ws://localhost:7880",  
+                                                       "region": "",           
+                                                       "protocol": 16}         
