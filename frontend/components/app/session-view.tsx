@@ -140,7 +140,12 @@ export const SessionView = ({
   }, [isSessionActive, room]);
 
   const agentDay = process.env.NEXT_PUBLIC_AGENT_DAY || '2';
-  const gradientClass = agentDay === '3' ? 'apollo-gradient' : 'zepto-gradient';
+  const gradientClass =
+    agentDay === '4'
+      ? 'pw-gradient'
+      : agentDay === '3'
+        ? 'apollo-gradient'
+        : 'zepto-gradient';
   
   return (
     <section className={`${gradientClass} relative z-10 h-full w-full overflow-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`} {...props}>
