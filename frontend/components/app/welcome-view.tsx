@@ -2,6 +2,7 @@
 
 import { CoffeeWelcomeView } from './coffee-welcome';
 import { WellnessWelcomeView } from './wellness-welcome';
+import { TeacherWelcomeView } from './teacher-welcome';
 
 interface WelcomeViewProps {
   startButtonText: string;
@@ -15,6 +16,9 @@ export function WelcomeView(props: React.ComponentProps<'div'> & WelcomeViewProp
   
   if (agentDay === '3') {
     return <WellnessWelcomeView {...props} />;
+  }
+  if (agentDay === '4') {
+    return <TeacherWelcomeView {...props} />;
   }
   return <CoffeeWelcomeView {...props} />;
 }

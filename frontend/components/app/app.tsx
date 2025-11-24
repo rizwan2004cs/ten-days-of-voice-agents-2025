@@ -13,7 +13,12 @@ interface AppProps {
 
 export function App({ appConfig }: AppProps) {
   const agentDay = process.env.NEXT_PUBLIC_AGENT_DAY || '2';
-  const gradientClass = agentDay === '3' ? 'apollo-gradient' : 'zepto-gradient';
+  const gradientClass =
+    agentDay === '4'
+      ? 'pw-gradient'
+      : agentDay === '3'
+        ? 'apollo-gradient'
+        : 'zepto-gradient';
   
   return (
     <ErrorBoundary>
