@@ -3,40 +3,55 @@
 import { motion } from 'motion/react';
 import { Button } from '@/components/livekit/button';
 const TeacherAvatar = () => (
-  <svg width="70" height="70" viewBox="0 0 120 120" className="drop-shadow-[0_10px_25px_rgba(59,130,246,0.35)]">
+  <svg width="110" height="110" viewBox="0 0 170 170" className="drop-shadow-[0_20px_40px_rgba(59,130,246,0.35)]">
     <defs>
-      <linearGradient id="teacherGlow" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stopColor="rgba(255,255,255,0.9)" />
-        <stop offset="60%" stopColor="rgba(148,163,184,0.4)" />
-        <stop offset="100%" stopColor="rgba(30,41,59,0.1)" />
+      <linearGradient id="teacherOuter" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="rgba(255,255,255,0.95)" />
+        <stop offset="70%" stopColor="rgba(148,163,184,0.2)" />
+        <stop offset="100%" stopColor="rgba(15,23,42,0.05)" />
+      </linearGradient>
+      <linearGradient id="chalkBoard" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="rgba(37,99,235,0.18)" />
+        <stop offset="100%" stopColor="rgba(59,130,246,0.35)" />
       </linearGradient>
     </defs>
-    <circle cx="60" cy="40" r="20" fill="url(#teacherGlow)" stroke="rgba(255,255,255,0.5)" strokeWidth="3" />
-    <rect x="35" y="58" width="50" height="40" rx="18" fill="rgba(148,163,184,0.35)" stroke="rgba(255,255,255,0.35)" strokeWidth="3" />
-    <rect x="20" y="22" width="80" height="10" rx="5" fill="rgba(59,130,246,0.15)" />
-    <rect x="24" y="25" width="72" height="4" rx="2" fill="rgba(255,255,255,0.3)" />
-    <rect x="48" y="75" width="24" height="30" rx="12" fill="rgba(59,130,246,0.35)" />
+    <circle cx="65" cy="80" r="55" fill="url(#teacherOuter)" stroke="rgba(255,255,255,0.35)" strokeWidth="3" />
+    {/* wall board */}
+    <rect x="85" y="40" width="70" height="55" rx="12" fill="url(#chalkBoard)" stroke="rgba(59,130,246,0.4)" strokeWidth="3" />
+    <rect x="90" y="48" width="48" height="4" rx="2" fill="rgba(255,255,255,0.25)" />
+    <rect x="90" y="60" width="60" height="3" rx="1.5" fill="rgba(255,255,255,0.18)" />
+    <rect x="90" y="70" width="50" height="3" rx="1.5" fill="rgba(255,255,255,0.15)" />
+    {/* mentor figure */}
+    <circle cx="55" cy="60" r="22" fill="rgba(248,250,252,0.9)" stroke="rgba(255,255,255,0.6)" strokeWidth="4" />
+    <rect x="28" y="90" width="54" height="45" rx="22" fill="rgba(148,163,184,0.5)" stroke="rgba(255,255,255,0.4)" strokeWidth="3" />
+    <rect x="40" y="100" width="30" height="35" rx="15" fill="rgba(59,130,246,0.4)" />
+    <rect x="38" y="120" width="34" height="12" rx="6" fill="rgba(37,99,235,0.35)" />
   </svg>
 );
 
 const StudentAvatar = () => (
-  <svg width="60" height="60" viewBox="0 0 120 120" className="drop-shadow-[0_10px_25px_rgba(248,113,113,0.35)]">
+  <svg width="95" height="95" viewBox="0 0 150 150" className="drop-shadow-[0_18px_36px_rgba(248,113,113,0.35)]">
     <defs>
-      <linearGradient id="studentGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <linearGradient id="studentOuter" x1="0%" y1="0%" x2="0%" y2="100%">
         <stop offset="0%" stopColor="rgba(255,255,255,0.85)" />
-        <stop offset="60%" stopColor="rgba(253,186,116,0.35)" />
-        <stop offset="100%" stopColor="rgba(127,29,29,0.15)" />
+        <stop offset="70%" stopColor="rgba(255,214,170,0.2)" />
+        <stop offset="100%" stopColor="rgba(127,29,29,0.08)" />
+      </linearGradient>
+      <linearGradient id="gown" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="rgba(248,113,113,0.35)" />
+        <stop offset="100%" stopColor="rgba(249,115,22,0.35)" />
       </linearGradient>
     </defs>
-    <circle cx="60" cy="36" r="18" fill="url(#studentGlow)" stroke="rgba(255,255,255,0.4)" strokeWidth="3" />
-    <path
-      d="M30 80 C30 62 90 62 90 80 L90 90 C90 95 86 100 80 100 H40 C34 100 30 95 30 90 Z"
-      fill="rgba(248,113,113,0.25)"
-      stroke="rgba(255,255,255,0.3)"
-      strokeWidth="3"
-    />
-    <rect x="35" y="70" width="50" height="12" rx="6" fill="rgba(248,113,113,0.35)" />
-    <rect x="40" y="86" width="40" height="18" rx="9" fill="rgba(251,191,36,0.25)" />
+    <circle cx="70" cy="75" r="50" fill="url(#studentOuter)" stroke="rgba(255,255,255,0.35)" strokeWidth="3" />
+    {/* graduation cap */}
+    <rect x="35" y="32" width="70" height="12" rx="6" fill="rgba(120,53,15,0.7)" />
+    <rect x="50" y="28" width="40" height="6" rx="3" fill="rgba(79,12,12,0.9)" />
+    <line x1="98" y1="42" x2="110" y2="65" stroke="rgba(251,191,36,0.8)" strokeWidth="3" strokeLinecap="round" />
+    <circle cx="110" cy="66" r="4" fill="rgba(251,191,36,0.8)" />
+    {/* student figure */}
+    <circle cx="70" cy="58" r="22" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,0.45)" strokeWidth="4" />
+    <rect x="35" y="90" width="70" height="42" rx="20" fill="url(#gown)" stroke="rgba(255,255,255,0.3)" strokeWidth="3" />
+    <rect x="48" y="100" width="44" height="28" rx="14" fill="rgba(248,250,252,0.4)" />
   </svg>
 );
 
@@ -127,7 +142,7 @@ const TeacherStudentAnimation = () => {
         animate={{ y: [0, -4, 0] }}
         transition={{ duration: 3, repeat: Infinity }}
       >
-        <div className="relative z-10 w-32 h-32 rounded-full bg-gradient-to-br from-indigo-400/50 to-cyan-400/40 border border-white/20 backdrop-blur flex items-center justify-center">
+        <div className="relative z-10 w-40 h-40 rounded-full bg-gradient-to-br from-indigo-400/40 to-cyan-400/30 border border-white/20 backdrop-blur flex items-center justify-center">
           <TeacherAvatar />
         </div>
         <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-24 h-32 bg-gradient-to-t from-slate-900 to-slate-800 rounded-[30px] shadow-[0_10px_30px_rgba(15,23,42,0.5)] -z-10" />
@@ -151,7 +166,7 @@ const TeacherStudentAnimation = () => {
         animate={{ y: [0, 3, 0] }}
         transition={{ duration: 2.6, repeat: Infinity }}
       >
-        <div className="relative z-10 w-28 h-28 rounded-full bg-gradient-to-br from-orange-400/50 to-rose-400/40 border border-white/15 backdrop-blur flex items-center justify-center">
+        <div className="relative z-10 w-32 h-32 rounded-full bg-gradient-to-br from-orange-400/40 to-rose-400/30 border border-white/15 backdrop-blur flex items-center justify-center">
           <StudentAvatar />
         </div>
         <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-16 h-24 bg-gradient-to-t from-gray-900 to-gray-800 rounded-[24px] -z-10" />
