@@ -2,6 +2,44 @@
 
 import { motion } from 'motion/react';
 import { Button } from '@/components/livekit/button';
+const TeacherAvatar = () => (
+  <svg width="70" height="70" viewBox="0 0 120 120" className="drop-shadow-[0_10px_25px_rgba(59,130,246,0.35)]">
+    <defs>
+      <linearGradient id="teacherGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="rgba(255,255,255,0.9)" />
+        <stop offset="60%" stopColor="rgba(148,163,184,0.4)" />
+        <stop offset="100%" stopColor="rgba(30,41,59,0.1)" />
+      </linearGradient>
+    </defs>
+    <circle cx="60" cy="40" r="20" fill="url(#teacherGlow)" stroke="rgba(255,255,255,0.5)" strokeWidth="3" />
+    <rect x="35" y="58" width="50" height="40" rx="18" fill="rgba(148,163,184,0.35)" stroke="rgba(255,255,255,0.35)" strokeWidth="3" />
+    <rect x="20" y="22" width="80" height="10" rx="5" fill="rgba(59,130,246,0.15)" />
+    <rect x="24" y="25" width="72" height="4" rx="2" fill="rgba(255,255,255,0.3)" />
+    <rect x="48" y="75" width="24" height="30" rx="12" fill="rgba(59,130,246,0.35)" />
+  </svg>
+);
+
+const StudentAvatar = () => (
+  <svg width="60" height="60" viewBox="0 0 120 120" className="drop-shadow-[0_10px_25px_rgba(248,113,113,0.35)]">
+    <defs>
+      <linearGradient id="studentGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="rgba(255,255,255,0.85)" />
+        <stop offset="60%" stopColor="rgba(253,186,116,0.35)" />
+        <stop offset="100%" stopColor="rgba(127,29,29,0.15)" />
+      </linearGradient>
+    </defs>
+    <circle cx="60" cy="36" r="18" fill="url(#studentGlow)" stroke="rgba(255,255,255,0.4)" strokeWidth="3" />
+    <path
+      d="M30 80 C30 62 90 62 90 80 L90 90 C90 95 86 100 80 100 H40 C34 100 30 95 30 90 Z"
+      fill="rgba(248,113,113,0.25)"
+      stroke="rgba(255,255,255,0.3)"
+      strokeWidth="3"
+    />
+    <rect x="35" y="70" width="50" height="12" rx="6" fill="rgba(248,113,113,0.35)" />
+    <rect x="40" y="86" width="40" height="18" rx="9" fill="rgba(251,191,36,0.25)" />
+  </svg>
+);
+
 
 const TeacherStudentAnimation = () => {
   return (
@@ -89,16 +127,8 @@ const TeacherStudentAnimation = () => {
         animate={{ y: [0, -4, 0] }}
         transition={{ duration: 3, repeat: Infinity }}
       >
-        <div className="relative z-10 w-28 h-28 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 border-4 border-white/20 shadow-lg flex items-center justify-center">
-          {/* teacher avatar */}
-          <div className="w-20 h-20 rounded-3xl bg-gradient-to-b from-slate-50 to-slate-200 flex flex-col items-center justify-center text-slate-800 font-semibold">
-            <div className="w-10 h-10 rounded-full bg-amber-100 mb-1 flex items-center justify-center text-xl">
-              👩‍🏫
-            </div>
-            <span className="text-xs tracking-widest uppercase text-slate-600">
-              Mentor
-            </span>
-          </div>
+        <div className="relative z-10 w-32 h-32 rounded-full bg-gradient-to-br from-indigo-400/50 to-cyan-400/40 border border-white/20 backdrop-blur flex items-center justify-center">
+          <TeacherAvatar />
         </div>
         <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-24 h-32 bg-gradient-to-t from-slate-900 to-slate-800 rounded-[30px] shadow-[0_10px_30px_rgba(15,23,42,0.5)] -z-10" />
       </motion.div>
@@ -121,11 +151,8 @@ const TeacherStudentAnimation = () => {
         animate={{ y: [0, 3, 0] }}
         transition={{ duration: 2.6, repeat: Infinity }}
       >
-        <div className="relative z-10 w-20 h-20 rounded-full bg-gradient-to-br from-rose-500 to-orange-400 border-4 border-white/15 shadow-lg flex items-center justify-center">
-          {/* student avatar */}
-          <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-2xl">
-            👨‍🎓
-          </div>
+        <div className="relative z-10 w-28 h-28 rounded-full bg-gradient-to-br from-orange-400/50 to-rose-400/40 border border-white/15 backdrop-blur flex items-center justify-center">
+          <StudentAvatar />
         </div>
         <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-16 h-24 bg-gradient-to-t from-gray-900 to-gray-800 rounded-[24px] -z-10" />
       </motion.div>
