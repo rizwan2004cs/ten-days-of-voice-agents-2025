@@ -26,6 +26,10 @@ The starter project includes:
 
 This starter app is compatible with any [custom web/mobile frontend](https://docs.livekit.io/agents/start/frontend/) or [SIP-based telephony](https://docs.livekit.io/agents/start/telephony/).
 
+## Day 4 Teach-the-Tutor agent
+
+To run the Day 4 active recall coach, set `AGENT_DAY=4` in your environment before starting the backend. The agent loads its study material from `shared-data/day4_tutor_content.json`. You can override this path by setting `DAY4_TUTOR_CONTENT_PATH=/absolute/path/to/your_content.json`. The JSON file should include `id`, `title`, `summary`, `sample_question`, and `teach_back_prompt` for each concept so the agent can drive the learn/quiz/teach-back flow.
+
 ## Coding agents and MCP
 
 This project is designed to work with coding agents like [Cursor](https://www.cursor.com/) and [Claude Code](https://www.anthropic.com/claude-code).
