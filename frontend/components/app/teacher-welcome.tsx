@@ -84,14 +84,24 @@ const TeacherStudentAnimation = () => {
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}
       >
-        <motion.div
-          className="relative"
-          animate={{ y: [0, -4, 0] }}
-          transition={{ duration: 3, repeat: Infinity }}
-        >
-          <div className="w-28 h-28 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 border-4 border-white/20 shadow-lg" />
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-24 h-32 bg-gradient-to-t from-slate-900 to-slate-800 rounded-[30px] shadow-[0_10px_30px_rgba(15,23,42,0.5)]" />
-        </motion.div>
+      <motion.div
+        className="relative flex flex-col items-center"
+        animate={{ y: [0, -4, 0] }}
+        transition={{ duration: 3, repeat: Infinity }}
+      >
+        <div className="w-28 h-28 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 border-4 border-white/20 shadow-lg flex items-center justify-center">
+          {/* teacher avatar */}
+          <div className="w-20 h-20 rounded-3xl bg-gradient-to-b from-slate-50 to-slate-200 flex flex-col items-center justify-center text-slate-800 font-semibold">
+            <div className="w-10 h-10 rounded-full bg-amber-100 mb-1 flex items-center justify-center text-xl">
+              👩‍🏫
+            </div>
+            <span className="text-xs tracking-widest uppercase text-slate-600">
+              Mentor
+            </span>
+          </div>
+        </div>
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-24 h-32 bg-gradient-to-t from-slate-900 to-slate-800 rounded-[30px] shadow-[0_10px_30px_rgba(15,23,42,0.5)]" />
+      </motion.div>
         <motion.div
           className="h-24 w-1 rounded-full bg-cyan-400/80"
           animate={{ rotate: [0, -8, 0] }}
@@ -106,14 +116,19 @@ const TeacherStudentAnimation = () => {
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.6 }}
       >
-        <motion.div
-          className="relative"
-          animate={{ y: [0, 3, 0] }}
-          transition={{ duration: 2.6, repeat: Infinity }}
-        >
-          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-rose-500 to-orange-400 border-4 border-white/15 shadow-lg" />
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-16 h-24 bg-gradient-to-t from-gray-900 to-gray-800 rounded-[24px]" />
-        </motion.div>
+      <motion.div
+        className="relative flex flex-col items-center"
+        animate={{ y: [0, 3, 0] }}
+        transition={{ duration: 2.6, repeat: Infinity }}
+      >
+        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-rose-500 to-orange-400 border-4 border-white/15 shadow-lg flex items-center justify-center">
+          {/* student avatar */}
+          <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center text-2xl">
+            👨‍🎓
+          </div>
+        </div>
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-16 h-24 bg-gradient-to-t from-gray-900 to-gray-800 rounded-[24px]" />
+      </motion.div>
         <motion.div
           className="w-24 h-16 rounded-2xl bg-white/10 border border-white/10 backdrop-blur shadow-lg flex flex-col justify-center px-4 text-xs text-slate-200"
           animate={{ opacity: [0.7, 1, 0.7], scale: [0.95, 1, 0.95] }}
