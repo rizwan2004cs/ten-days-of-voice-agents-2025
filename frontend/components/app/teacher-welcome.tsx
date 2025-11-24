@@ -166,7 +166,12 @@ const PhysicsBadge = () => (
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.2 }}
   >
-    <div className="glass-card rounded-full px-6 py-2 border border-white/10">
+    <div className="glass-card rounded-full px-5 py-2 border border-white/10 flex items-center gap-3">
+      <img
+        src="/pw-logo.svg"
+        alt="Physics Wallah Logo"
+        className="h-6 w-6"
+      />
       <span className="text-sm font-semibold tracking-[0.4em] uppercase text-slate-100">
         Physics Wallah
       </span>
