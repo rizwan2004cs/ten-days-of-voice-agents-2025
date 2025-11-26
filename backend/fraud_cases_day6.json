@@ -1,0 +1,54 @@
+[
+  {
+    "username": "John",
+    "security_identifier": "12345",
+    "card_last_4": "4242",
+    "transaction_merchant": "ABC Electronics",
+    "amount": "$999.00",
+    "location": "New York, NY",
+    "timestamp": "2025-11-26 14:32",
+    "security_question": "What is the name of your first pet?",
+    "security_answer": "Fluffy",
+    "status": "confirmed_safe",
+    "outcome_note": "Customer verbally confirmed the transaction as legitimate."
+  },
+  {
+    "username": "John",
+    "security_identifier": "98765",
+    "card_last_4": "7788",
+    "transaction_merchant": "Global Travel Co",
+    "amount": "$1,250.49",
+    "location": "Paris, France",
+    "timestamp": "2025-11-25 09:10",
+    "security_question": "What is the name of your first pet?",
+    "security_answer": "Fluffy",
+    "status": "confirmed_fraud",
+    "outcome_note": "Customer verbally denied making the transaction. Card should be considered blocked and a dispute workflow started."
+  },
+  {
+    "username": "John",
+    "security_identifier": "55521",
+    "card_last_4": "1024",
+    "transaction_merchant": "Aurora Rideshare",
+    "amount": "$37.40",
+    "location": "San Francisco, CA",
+    "timestamp": "2025-11-24 21:15",
+    "security_question": "What is the name of your first pet?",
+    "security_answer": "Fluffy",
+    "status": "confirmed_fraud",
+    "outcome_note": "Customer verbally denied making the transaction. Card should be considered blocked and a dispute workflow started."
+  },
+  {
+    "username": "John",
+    "security_identifier": "33447",
+    "card_last_4": "9933",
+    "transaction_merchant": "Midnight Market",
+    "amount": "$421.10",
+    "location": "Chicago, IL",
+    "timestamp": "2025-11-23 02:45",
+    "security_question": "What is the name of your first pet?",
+    "security_answer": "Fluffy",
+    "status": "confirmed_safe",
+    "outcome_note": "Customer verbally confirmed the transaction as legitimate."
+  }
+]

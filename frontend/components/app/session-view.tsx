@@ -141,11 +141,13 @@ export const SessionView = ({
 
   const agentDay = process.env.NEXT_PUBLIC_AGENT_DAY || '2';
   const gradientClass =
-    agentDay === '4'
-      ? 'pw-gradient'
-      : agentDay === '3'
-        ? 'apollo-gradient'
-        : 'zepto-gradient';
+    agentDay === '6'
+      ? 'bank-gradient'
+      : agentDay === '4'
+        ? 'pw-gradient'
+        : agentDay === '3'
+          ? 'apollo-gradient'
+          : 'zepto-gradient';
   const transcriptPanelClass = cn(
     'space-y-3 transition-opacity duration-300 ease-out rounded-[32px] border px-6 py-6 backdrop-blur-2xl',
     orderDetails ? 'ml-auto max-w-2xl' : 'mx-auto max-w-2xl',
@@ -153,7 +155,9 @@ export const SessionView = ({
       ? 'bg-slate-950/60 border-white/10 shadow-[0_30px_140px_rgba(8,15,45,0.65)]'
       : agentDay === '3'
         ? 'bg-slate-900/70 border-cyan-200/15 shadow-[0_30px_140px_rgba(5,30,55,0.55)]'
-        : 'bg-[#120822]/70 border-purple-200/15 shadow-[0_30px_140px_rgba(25,10,50,0.6)]'
+        : agentDay === '6'
+          ? 'bg-[#2b0411]/75 border-pink-200/20 shadow-[0_30px_140px_rgba(120,10,60,0.7)]'
+          : 'bg-[#120822]/70 border-purple-200/15 shadow-[0_30px_140px_rgba(25,10,50,0.6)]'
   );
   const controlSurfaceClass = cn(
     'rounded-[28px] border px-4 py-3 backdrop-blur-2xl',
@@ -161,7 +165,9 @@ export const SessionView = ({
       ? 'border-white/10 bg-slate-950/80 shadow-[0_25px_120px_rgba(8,15,45,0.55)]'
       : agentDay === '3'
         ? 'border-cyan-200/15 bg-slate-900/80 shadow-[0_25px_120px_rgba(4,25,50,0.5)]'
-        : 'border-purple-200/15 bg-[#0c0618]/85 shadow-[0_25px_120px_rgba(20,6,40,0.55)]'
+        : agentDay === '6'
+          ? 'border-pink-200/25 bg-[#18000a]/90 shadow-[0_25px_120px_rgba(140,10,60,0.6)]'
+          : 'border-purple-200/15 bg-[#0c0618]/85 shadow-[0_25px_120px_rgba(20,6,40,0.55)]'
   );
   
   return (

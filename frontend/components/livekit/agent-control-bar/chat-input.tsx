@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { PaperPlaneRightIcon, SpinnerIcon } from '@phosphor-icons/react/dist/ssr';
 import { Button } from '@/components/livekit/button';
+import { cn } from '@/lib/utils';
 
 const MOTION_PROPS = {
   variants: {
@@ -37,6 +38,7 @@ export function ChatInput({
   const inputRef = useRef<HTMLInputElement>(null);
   const [isSending, setIsSending] = useState(false);
   const [message, setMessage] = useState<string>('');
+  const agentDay = process.env.NEXT_PUBLIC_AGENT_DAY || '2';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -89,7 +91,12 @@ export function ChatInput({
           disabled={isDisabled}
           variant={isDisabled ? 'secondary' : 'primary'}
           title={isSending ? 'Sending...' : 'Send'}
-          className="self-start"
+          className={cn(
+            'self-start',
+            agentDay === '6' && !isDisabled
+              ? 'bg-gradient-to-r from-[#dc2430] via-[#e73c7e] to-[#7b4397] text-white border-none shadow-[0_0_20px_rgba(220,36,48,0.6)]'
+              : ''
+          )}
         >
           {isSending ? (
             <SpinnerIcon className="animate-spin" weight="bold" />

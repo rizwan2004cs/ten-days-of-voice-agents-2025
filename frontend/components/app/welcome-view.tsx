@@ -3,6 +3,7 @@
 import { CoffeeWelcomeView } from './coffee-welcome';
 import { WellnessWelcomeView } from './wellness-welcome';
 import { TeacherWelcomeView } from './teacher-welcome';
+import { FraudWelcomeView } from './fraud-welcome';
 
 interface WelcomeViewProps {
   startButtonText: string;
@@ -14,6 +15,9 @@ export function WelcomeView(props: React.ComponentProps<'div'> & WelcomeViewProp
     ? (window as any).__NEXT_PUBLIC_AGENT_DAY__ || process.env.NEXT_PUBLIC_AGENT_DAY || '2'
     : process.env.NEXT_PUBLIC_AGENT_DAY || '2';
   
+  if (agentDay === '6') {
+    return <FraudWelcomeView {...props} />;
+  }
   if (agentDay === '3') {
     return <WellnessWelcomeView {...props} />;
   }
