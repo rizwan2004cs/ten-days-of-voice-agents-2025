@@ -50,7 +50,7 @@ export function Fade({ top = false, bottom = false, className }: FadeProps) {
   return (
     <div
       className={cn(
-        'from-background pointer-events-none h-4 bg-linear-to-b to-transparent',
+        'pointer-events-none h-4 bg-linear-to-b to-transparent',
         top && 'bg-linear-to-b',
         bottom && 'bg-linear-to-t',
         className
@@ -91,7 +91,7 @@ export const SessionView = ({
   }, [messages]);
 
   return (
-    <section className="bg-background relative z-10 h-full w-full overflow-hidden" {...props}>
+    <section className="relative z-10 h-full w-full overflow-hidden bg-[#fe5206] !bg-[#fe5206]" {...props}>
       {/* Chat Transcript */}
       <div
         className={cn(
@@ -99,12 +99,12 @@ export const SessionView = ({
           !chatOpen && 'pointer-events-none'
         )}
       >
-        <Fade top className="absolute inset-x-4 top-0 h-40" />
-        <ScrollArea ref={scrollAreaRef} className="px-4 pt-40 pb-[150px] md:px-6 md:pb-[180px]">
+        <Fade top className="absolute inset-x-4 top-0 h-40 bg-gradient-to-b from-white/30 to-transparent" />
+        <ScrollArea ref={scrollAreaRef} className="px-4 pt-40 pb-[180px] md:px-6 md:pb-[220px]">
           <ChatTranscript
             hidden={!chatOpen}
             messages={messages}
-            className="mx-auto max-w-2xl space-y-3 transition-opacity duration-300 ease-out"
+            className="mx-auto max-w-2xl space-y-3 mb-6 transition-opacity duration-300 ease-out"
           />
         </ScrollArea>
       </div>
@@ -120,8 +120,7 @@ export const SessionView = ({
         {appConfig.isPreConnectBufferEnabled && (
           <PreConnectMessage messages={messages} className="pb-4" />
         )}
-        <div className="bg-background relative mx-auto max-w-2xl pb-3 md:pb-12">
-          <Fade bottom className="absolute inset-x-0 top-0 h-4 -translate-y-full" />
+        <div className="relative mx-auto max-w-2xl pb-3 md:pb-12">
           <AgentControlBar controls={controls} onChatOpenChange={setChatOpen} />
         </div>
       </MotionBottom>
