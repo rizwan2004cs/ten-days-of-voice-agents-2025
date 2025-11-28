@@ -10,21 +10,19 @@ const toggleVariants = cva(
     'inline-flex items-center justify-center gap-2 rounded-full',
     'text-sm font-medium whitespace-nowrap',
     'cursor-pointer outline-none transition-[color,box-shadow,background-color]',
-    'hover:bg-muted hover:text-muted-foreground',
     'disabled:pointer-events-none disabled:opacity-50',
-    'data-[state=on]:bg-accent data-[state=on]:text-accent-foreground',
     'focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:border-ring',
     'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive ',
-    "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0",
+    "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 [&_svg]:text-current",
   ],
   {
     variants: {
       variant: {
-        default: 'bg-transparent',
+        default: 'bg-transparent hover:bg-muted hover:text-muted-foreground',
         primary:
-          'bg-muted data-[state=on]:bg-muted hover:text-foreground text-destructive hover:text-foreground hover:bg-foreground/10 hover:data-[state=on]:bg-foreground/10',
+          'border-2 border-[#00ff41] bg-[#0a0a0a] text-[#00ff41] data-[state=on]:bg-[#ff0040] data-[state=on]:text-[#050505] data-[state=on]:border-[#ff0040] hover:bg-[#00ff41]/20 hover:text-[#00ff41] hover:data-[state=on]:bg-[#ff0040] hover:data-[state=on]:text-[#050505] data-[state=off]:bg-[#0a0a0a] data-[state=off]:text-[#003b00] data-[state=on]:animate-pulse',
         secondary:
-          'bg-muted data-[state=on]:bg-muted hover:text-foreground hover:bg-foreground/10 hover:data-[state=on]:bg-foreground/10 data-[state=on]:bg-blue-500/20 data-[state=on]:hover:bg-blue-500/30 data-[state=on]:text-blue-700 dark:data-[state=on]:text-blue-300',
+          'terminal-border bg-[#0a0a0a] text-terminal-green data-[state=on]:bg-terminal-green data-[state=on]:text-[#050505] hover:bg-terminal-green/20 hover:text-terminal-green hover:data-[state=on]:bg-terminal-green hover:data-[state=on]:text-[#050505] data-[state=off]:bg-[#0a0a0a] data-[state=off]:text-terminal-dim',
         outline:
           'border border-input bg-transparent shadow-xs hover:bg-accent hover:text-accent-foreground',
       },

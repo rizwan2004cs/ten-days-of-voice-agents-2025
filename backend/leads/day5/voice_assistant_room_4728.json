@@ -1,0 +1,20 @@
+{
+  "lead_id": "voice_assistant_room_4728",
+  "timestamp": "2025-11-25T21:11:48.576703",
+  "finalized": true,
+  "summary": "Lead summary: Name=Razwan; Company=Ambitious Developers; Email=abc@gmail.com; Role=Freelancer; UseCase=Integrating payment gateway into client projects; TeamSize=5; Timeline=Next few weeks; Budget=unspecified.",
+  "name": "Razwan",
+  "company": "Ambitious Developers",
+  "email": "abc@gmail.com",
+  "role": "Freelancer",
+  "use_case": "Integrating payment gateway into client projects",
+  "team_size": "5",
+  "timeline": "Next few weeks",
+  "budget": "",
+  "notes": [
+    "Client's projects are e-commerce based.",
+    "Timeline: Next few weeks, indicating urgency."
+  ],
+  "missing_fields": [],
+  "is_complete": true
+}

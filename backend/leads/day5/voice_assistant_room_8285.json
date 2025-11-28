@@ -1,0 +1,19 @@
+{
+  "lead_id": "voice_assistant_room_8285",
+  "timestamp": "2025-11-25T20:51:13.279958",
+  "finalized": false,
+  "summary": null,
+  "name": "Rizwan",
+  "company": "Hobby Developers",
+  "email": "abc@gmail.com",
+  "role": "Home Developer",
+  "use_case": "Add a payment gateway to website",
+  "team_size": "5-10 developers",
+  "timeline": "now",
+  "budget": "",
+  "notes": [
+    "Urgent implementation needed."
+  ],
+  "missing_fields": [],
+  "is_complete": true
+}

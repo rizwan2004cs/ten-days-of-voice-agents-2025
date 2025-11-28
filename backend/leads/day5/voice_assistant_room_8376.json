@@ -1,0 +1,25 @@
+{
+  "lead_id": "voice_assistant_room_8376",
+  "timestamp": "2025-11-25T21:01:20.488544",
+  "finalized": false,
+  "summary": null,
+  "name": "",
+  "company": "",
+  "email": "",
+  "role": "",
+  "use_case": "",
+  "team_size": "",
+  "timeline": "",
+  "budget": "",
+  "notes": [],
+  "missing_fields": [
+    "name",
+    "company",
+    "email",
+    "role",
+    "use_case",
+    "team_size",
+    "timeline"
+  ],
+  "is_complete": false
+}

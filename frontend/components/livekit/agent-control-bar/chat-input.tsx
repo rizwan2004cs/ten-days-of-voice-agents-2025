@@ -65,11 +65,11 @@ export function ChatInput({
       inert={!chatOpen}
       {...MOTION_PROPS}
       animate={chatOpen ? 'visible' : 'hidden'}
-      className="border-input/50 flex w-full items-start overflow-hidden border-b"
+      className="flex w-full items-start overflow-hidden bg-white/98 backdrop-blur-sm rounded-t-lg"
     >
       <form
         onSubmit={handleSubmit}
-        className="mb-3 flex grow items-end gap-2 rounded-md pl-1 text-sm"
+        className="mb-3 flex grow items-end gap-2 rounded-lg bg-white/95 px-3 py-2.5 text-sm shadow-md"
       >
         <input
           autoFocus
@@ -77,9 +77,9 @@ export function ChatInput({
           type="text"
           value={message}
           disabled={!chatOpen}
-          placeholder="Type something..."
+          placeholder="Type your message..."
           onChange={(e) => setMessage(e.target.value)}
-          className="h-8 flex-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+          className="h-9 flex-1 bg-transparent text-[#1c1c1c] placeholder:text-[#ff5200]/70 focus:outline-none focus:ring-2 focus:ring-[#ff5200]/50 focus:ring-offset-1 rounded-md disabled:cursor-not-allowed disabled:opacity-50"
         />
         <Button
           size="icon"

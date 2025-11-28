@@ -1,0 +1,19 @@
+{
+  "lead_id": "voice_assistant_room_703",
+  "timestamp": "2025-11-25T21:28:29.118338",
+  "finalized": true,
+  "summary": "Lead summary: Name=Razwan; Company=Anonymous; Email=abc@gmail.com; Role=Product; UseCase=E-commerce payment integration; TeamSize=5; Timeline=now; Budget=unspecified.",
+  "name": "Razwan",
+  "company": "Anonymous",
+  "email": "abc@gmail.com",
+  "role": "Product",
+  "use_case": "E-commerce payment integration",
+  "team_size": "5",
+  "timeline": "now",
+  "budget": "",
+  "notes": [
+    "Client is an e-commerce business"
+  ],
+  "missing_fields": [],
+  "is_complete": true
+}

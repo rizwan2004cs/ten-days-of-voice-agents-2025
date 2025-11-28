@@ -1,0 +1,17 @@
+{
+  "lead_id": "voice_assistant_room_4134",
+  "timestamp": "2025-11-25T21:44:39.350015",
+  "finalized": true,
+  "summary": "Lead summary: Name=Rami; Company=Techwoods; Email=abc@gmail.com; Role=Back-end developer; UseCase=payment gateway for an e-commerce client; TeamSize=5-10; Timeline=next few weeks; Budget=unspecified.",
+  "name": "Rami",
+  "company": "Techwoods",
+  "email": "abc@gmail.com",
+  "role": "Back-end developer",
+  "use_case": "payment gateway for an e-commerce client",
+  "team_size": "5-10",
+  "timeline": "next few weeks",
+  "budget": "",
+  "notes": [],
+  "missing_fields": [],
+  "is_complete": true
+}

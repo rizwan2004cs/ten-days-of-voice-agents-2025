@@ -56,14 +56,14 @@ export function TrackSelector({
             <span
               className={cn([
                 'h-full w-0.5 origin-center rounded-2xl',
-                'group-data-[state=on]/track:bg-foreground group-data-[state=off]/track:bg-destructive',
-                'data-lk-muted:bg-muted',
+                'group-data-[state=on]/track:bg-terminal-green group-data-[state=off]/track:bg-terminal-dim',
+                'data-lk-muted:bg-terminal-dim',
               ])}
             />
           </BarVisualizer>
         )}
       </TrackToggle>
-      <hr className="bg-border peer-data-[state=off]/track:bg-destructive/20 relative z-10 -mr-px hidden h-4 w-px border-none has-[~_button]:block" />
+      <hr className="bg-white/30 peer-data-[state=off]/track:bg-white/20 relative z-10 -mr-px hidden h-4 w-px border-none has-[~_button]:block" />
       <TrackDeviceSelect
         size="sm"
         kind={kind}
@@ -71,11 +71,11 @@ export function TrackSelector({
         onMediaDeviceError={onMediaDeviceError}
         onActiveDeviceChange={onActiveDeviceChange}
         className={cn([
-          'rounded-l-none pl-2',
-          'peer-data-[state=off]/track:text-destructive',
-          'hover:text-foreground focus:text-foreground',
-          'hover:peer-data-[state=off]/track:text-foreground',
-          'focus:peer-data-[state=off]/track:text-destructive',
+          'rounded-l-none pl-2 bg-[#0a0a0a] text-[#00ff41] border-2 border-[#00ff41]',
+          'peer-data-[state=off]/track:text-[#003b00]',
+          'hover:text-[#00ff41] focus:text-[#00ff41]',
+          'hover:peer-data-[state=off]/track:text-[#00ff41]',
+          'focus:peer-data-[state=off]/track:text-[#00ff41]',
         ])}
       />
     </div>

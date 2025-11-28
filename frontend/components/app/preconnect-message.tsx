@@ -45,8 +45,8 @@ export function PreConnectMessage({ className, messages = [] }: PreConnectMessag
           aria-hidden={messages.length > 0}
           className={cn('pointer-events-none text-center', className)}
         >
-          <ShimmerText className="text-sm font-semibold">
-            Agent is listening, ask it a question
+          <ShimmerText className="text-sm font-semibold text-white">
+            Instamart valet is on standby—ask for groceries, party packs, or order tracking.
           </ShimmerText>
         </MotionMessage>
       )}

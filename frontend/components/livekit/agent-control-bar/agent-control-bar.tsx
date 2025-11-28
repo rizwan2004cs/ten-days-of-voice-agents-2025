@@ -89,7 +89,7 @@ export function AgentControlBar({
     <div
       aria-label="Voice assistant controls"
       className={cn(
-        'bg-background border-input/50 dark:border-muted flex flex-col rounded-[31px] border p-3 drop-shadow-md/3',
+        'border-2 border-[#00ff41] flex flex-col rounded-lg p-4 bg-[#0a0a0a]',
         className
       )}
       {...props}
@@ -103,8 +103,8 @@ export function AgentControlBar({
         />
       )}
 
-      <div className="flex gap-1">
-        <div className="flex grow gap-1">
+      <div className="flex gap-2">
+        <div className="flex grow gap-2">
           {/* Toggle Microphone */}
           {visibleControls.microphone && (
             <TrackSelector
@@ -155,8 +155,9 @@ export function AgentControlBar({
             aria-label="Toggle transcript"
             pressed={chatOpen}
             onPressedChange={handleToggleTranscript}
+            className="transition-all duration-200"
           >
-            <ChatTextIcon weight="bold" />
+            <ChatTextIcon weight="bold" className="text-white" />
           </Toggle>
         </div>
 
@@ -166,7 +167,8 @@ export function AgentControlBar({
             variant="destructive"
             onClick={handleDisconnect}
             disabled={!isSessionActive}
-            className="font-mono"
+            className="font-mono border-2 border-[#ff0040] bg-[#0a0a0a] text-[#ff0040] hover:bg-[#ff0040]/20 hover:text-[#ff0040] focus:bg-[#ff0040]/20 focus:text-[#ff0040] min-w-[100px]"
+            style={{ textShadow: '0 0 5px #ff0040, 0 0 10px #ff0040' }}
           >
             <PhoneDisconnectIcon weight="bold" />
             <span className="hidden md:inline">END CALL</span>

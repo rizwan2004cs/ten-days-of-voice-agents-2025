@@ -1,0 +1,203 @@
+[
+  {
+    "id": "inst_01",
+    "name": "Nandini GoodLife Toned Milk 1L",
+    "price": 58,
+    "currency": "INR",
+    "category": "Dairy & Breakfast",
+    "tags": ["daily essential", "milk", "vegetarian"],
+    "unit": "1L tetra pack",
+    "brand": "Nandini"
+  },
+  {
+    "id": "inst_02",
+    "name": "Lay's India's Magic Masala (Blue)",
+    "price": 30,
+    "currency": "INR",
+    "category": "Munchies",
+    "tags": ["chips", "snack", "party"],
+    "unit": "52g pouch",
+    "brand": "Lay's"
+  },
+  {
+    "id": "inst_03",
+    "name": "Coca-Cola (750ml)",
+    "price": 45,
+    "currency": "INR",
+    "category": "Cool Drinks",
+    "tags": ["beverage", "party"],
+    "unit": "750ml PET",
+    "brand": "Coca-Cola"
+  },
+  {
+    "id": "inst_04",
+    "name": "Fresh Coriander (100g)",
+    "price": 14,
+    "currency": "INR",
+    "category": "Fresh Vegetables",
+    "tags": ["cooking essential", "greens", "veg"],
+    "unit": "100g bunch",
+    "brand": "Farm Fresh"
+  },
+  {
+    "id": "inst_05",
+    "name": "Durex Air (3s)",
+    "price": 130,
+    "currency": "INR",
+    "category": "Wellness & Emergency",
+    "tags": ["pharmacy", "adult", "emergency"],
+    "unit": "Pack of 3",
+    "brand": "Durex"
+  },
+  {
+    "id": "inst_06",
+    "name": "iD Idly/Dosa Batter (1kg)",
+    "price": 95,
+    "currency": "INR",
+    "category": "Instant Food",
+    "tags": ["breakfast", "fresh", "ready to cook"],
+    "unit": "1kg pouch",
+    "brand": "iD Fresh"
+  },
+  {
+    "id": "inst_07",
+    "name": "Whole Wheat Sandwich Bread",
+    "price": 48,
+    "currency": "INR",
+    "category": "Bakery",
+    "tags": ["bread", "breakfast", "veg"],
+    "unit": "400g loaf",
+    "brand": "Modern"
+  },
+  {
+    "id": "inst_08",
+    "name": "Free Range Eggs (6 pack)",
+    "price": 72,
+    "currency": "INR",
+    "category": "Dairy & Breakfast",
+    "tags": ["breakfast", "protein"],
+    "unit": "Pack of 6",
+    "brand": "Nature's"
+  },
+  {
+    "id": "inst_09",
+    "name": "Daawat Biryani Basmati Rice (1kg)",
+    "price": 195,
+    "currency": "INR",
+    "category": "Meals & Staples",
+    "tags": ["biryani", "rice", "party"],
+    "unit": "1kg pouch",
+    "brand": "Daawat"
+  },
+  {
+    "id": "inst_10",
+    "name": "Milky Mist Thick Curd (500g)",
+    "price": 85,
+    "currency": "INR",
+    "category": "Dairy & Breakfast",
+    "tags": ["curd", "probiotic", "veg"],
+    "unit": "500g cup",
+    "brand": "Milky Mist"
+  },
+  {
+    "id": "inst_11",
+    "name": "Ice Cubes Party Pack (1kg)",
+    "price": 60,
+    "currency": "INR",
+    "category": "Emergency Needs",
+    "tags": ["party", "beverage"],
+    "unit": "1kg bag",
+    "brand": "Polar"
+  },
+  {
+    "id": "inst_12",
+    "name": "Thums Up (750ml)",
+    "price": 45,
+    "currency": "INR",
+    "category": "Cool Drinks",
+    "tags": ["beverage", "party"],
+    "unit": "750ml PET",
+    "brand": "Thums Up"
+  },
+  {
+    "id": "inst_13",
+    "name": "Amul Butter (100g)",
+    "price": 58,
+    "currency": "INR",
+    "category": "Dairy & Breakfast",
+    "tags": ["butter", "breakfast"],
+    "unit": "100g pack",
+    "brand": "Amul"
+  },
+  {
+    "id": "inst_14",
+    "name": "Kwality Walls Choco Cone (Pack of 3)",
+    "price": 180,
+    "currency": "INR",
+    "category": "Late Night Cravings",
+    "tags": ["dessert", "ice cream"],
+    "unit": "Pack of 3",
+    "brand": "Kwality Walls"
+  },
+  {
+    "id": "inst_15",
+    "name": "Saffola Active Cooking Oil (1L)",
+    "price": 210,
+    "currency": "INR",
+    "category": "Meals & Staples",
+    "tags": ["cooking essential", "oil"],
+    "unit": "1L pouch",
+    "brand": "Saffola"
+  },
+  {
+    "id": "inst_16",
+    "name": "Hershey's Chocolate Syrup (623g)",
+    "price": 189,
+    "currency": "INR",
+    "category": "Munchies",
+    "tags": ["dessert", "topping"],
+    "unit": "623g bottle",
+    "brand": "Hershey's"
+  },
+  {
+    "id": "inst_17",
+    "name": "Paper Boat Aam Panna (600ml)",
+    "price": 80,
+    "currency": "INR",
+    "category": "Cool Drinks",
+    "tags": ["beverage", "summer"],
+    "unit": "600ml pack",
+    "brand": "Paper Boat"
+  },
+  {
+    "id": "inst_18",
+    "name": "MTR Ready to Eat Pongal (300g)",
+    "price": 110,
+    "currency": "INR",
+    "category": "Instant Food",
+    "tags": ["meal", "ready to eat", "veg"],
+    "unit": "300g pouch",
+    "brand": "MTR"
+  },
+  {
+    "id": "inst_19",
+    "name": "B Natural Mixed Fruit Juice (1L)",
+    "price": 120,
+    "currency": "INR",
+    "category": "Cool Drinks",
+    "tags": ["juice", "family pack"],
+    "unit": "1L tetra pack",
+    "brand": "B Natural"
+  },
+  {
+    "id": "inst_20",
+    "name": "Nutella Hazelnut Spread (350g)",
+    "price": 349,
+    "currency": "INR",
+    "category": "Breakfast & Spreads",
+    "tags": ["spread", "dessert"],
+    "unit": "350g jar",
+    "brand": "Ferrero"
+  }
+]
+

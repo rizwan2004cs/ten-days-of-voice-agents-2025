@@ -123,8 +123,8 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     delay: animationDelay,
                   }}
                   className={cn(
-                    'bg-background aspect-square h-[90px] rounded-md border border-transparent transition-[border,drop-shadow]',
-                    chatOpen && 'border-input/50 drop-shadow-lg/10 delay-200'
+                    'bg-[#ff5200]/90 aspect-square h-[90px] rounded-md border border-white/40 transition-[border,drop-shadow] shadow-lg',
+                    chatOpen && 'border-white/60 drop-shadow-lg delay-200'
                   )}
                 >
                   <BarVisualizer
@@ -136,9 +136,9 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                   >
                     <span
                       className={cn([
-                        'bg-muted min-h-2.5 w-2.5 rounded-full',
+                        'bg-white/60 min-h-2.5 w-2.5 rounded-full',
                         'origin-center transition-colors duration-250 ease-linear',
-                        'data-[lk-highlighted=true]:bg-foreground data-[lk-muted=true]:bg-muted',
+                        'data-[lk-highlighted=true]:bg-white data-[lk-muted=true]:bg-white/40',
                       ])}
                     />
                   </BarVisualizer>
@@ -174,7 +174,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     },
                   }}
                   className={cn(
-                    'overflow-hidden bg-black drop-shadow-xl/80',
+                    'overflow-hidden bg-[#ff5200]/90 drop-shadow-xl/80 border border-white/40 rounded-md',
                     chatOpen ? 'h-[90px]' : 'h-auto w-full'
                   )}
                 >
@@ -225,7 +225,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                     trackRef={cameraTrack || screenShareTrack}
                     width={(cameraTrack || screenShareTrack)?.publication.dimensions?.width ?? 0}
                     height={(cameraTrack || screenShareTrack)?.publication.dimensions?.height ?? 0}
-                    className="bg-muted aspect-square w-[90px] rounded-md object-cover"
+                    className="bg-[#ff5200]/80 aspect-square w-[90px] rounded-md object-cover border border-white/40"
                   />
                 </MotionContainer>
               )}
