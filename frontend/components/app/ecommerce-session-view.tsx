@@ -654,6 +654,7 @@ export const EcommerceSessionView = ({
       
       // If a new search term is detected, clear old filters first (except the new search term)
       const hasNewSearchTerm = extractedFilters.searchTerm !== undefined 
+        && extractedFilters.searchTerm !== null
         && extractedFilters.searchTerm.trim() !== '' 
         && extractedFilters.searchTerm.trim() !== searchTerm;
       
@@ -670,7 +671,7 @@ export const EcommerceSessionView = ({
       // Always update if found (don't check if already set - agent might be refining filters)
       let filtersUpdated = false;
       
-      if (extractedFilters.searchTerm !== undefined && extractedFilters.searchTerm.trim() !== '') {
+      if (extractedFilters.searchTerm !== undefined && extractedFilters.searchTerm !== null && extractedFilters.searchTerm.trim() !== '') {
         console.log('🔍 Setting search term:', extractedFilters.searchTerm);
         setSearchTerm(extractedFilters.searchTerm.trim());
         filtersUpdated = true;
@@ -685,17 +686,17 @@ export const EcommerceSessionView = ({
         setFilterCategory(extractedFilters.category);
         filtersUpdated = true;
       }
-      if (extractedFilters.maxPrice !== undefined && extractedFilters.maxPrice > 0) {
+      if (extractedFilters.maxPrice !== undefined && extractedFilters.maxPrice !== null && extractedFilters.maxPrice > 0) {
         console.log('💰 Setting max price:', extractedFilters.maxPrice);
         setFilterMaxPrice(extractedFilters.maxPrice);
         filtersUpdated = true;
       }
-      if (extractedFilters.minPrice !== undefined && extractedFilters.minPrice > 0) {
+      if (extractedFilters.minPrice !== undefined && extractedFilters.minPrice !== null && extractedFilters.minPrice > 0) {
         console.log('💰 Setting min price:', extractedFilters.minPrice);
         setFilterMinPrice(extractedFilters.minPrice);
         filtersUpdated = true;
       }
-      if (extractedFilters.sortBy !== undefined && extractedFilters.sortBy.trim() !== '') {
+      if (extractedFilters.sortBy !== undefined && extractedFilters.sortBy !== null && extractedFilters.sortBy.trim() !== '') {
         console.log('🔀 Setting sort by:', extractedFilters.sortBy);
         setSortBy(extractedFilters.sortBy);
         filtersUpdated = true;
@@ -1122,7 +1123,7 @@ export const EcommerceSessionView = ({
 
   return (
     <section
-      className="relative z-10 h-full w-full overflow-hidden bg-gradient-to-b from-[#F9FAFB] to-[#EEF1F5]"
+      className="relative z-10 h-full w-full overflow-hidden bg-gradient-to-b from-[#F9FAFB] to-[#EEF1F5] p-4 md:p-6"
       {...props}
     >
       <style jsx>{`
@@ -1136,8 +1137,8 @@ export const EcommerceSessionView = ({
         }
       `}</style>
 
-      {/* Amazon Navbar with soft shadow */}
-      <nav className="bg-[#232F3E] text-white px-4 py-3 shadow-lg sticky top-0 z-50" style={{ boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)' }}>
+      {/* Amazon Navbar with soft shadow, rounded, and glass effect */}
+      <nav className="bg-gradient-to-r from-[#232F3E]/95 via-[#1a2533]/95 to-[#232F3E]/95 backdrop-blur-2xl text-white px-4 py-3 shadow-lg sticky top-0 z-50 rounded-2xl mb-4 mx-4" style={{ boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1)' }}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Left: Logo */}
           <div className="flex items-center space-x-4">
@@ -1271,7 +1272,7 @@ export const EcommerceSessionView = ({
                 />
               </svg>
               {orders.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-purple-400 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-lg shadow-purple-400/50">
+                <span className="absolute -top-1 -right-1 bg-[#007185] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-lg shadow-[#007185]/50">
                   {orders.length > 9 ? '9+' : orders.length}
                 </span>
               )}
@@ -1302,7 +1303,7 @@ export const EcommerceSessionView = ({
         )}
 
         {/* Filter Status Bar & Active Filters */}
-        <div className="backdrop-blur-xl bg-white/10 border-b border-white/20">
+        <div className="bg-white/80 backdrop-blur-2xl border-2 border-white/70 rounded-2xl shadow-lg mb-4" style={{ boxShadow: '0 4px 16px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5)' }}>
           {/* FilterStatusBar hidden per user request */}
           {/* <FilterStatusBar
             totalProducts={products.length}
@@ -1335,55 +1336,58 @@ export const EcommerceSessionView = ({
             )}
           </div>
 
-        {/* Main Canvas - Product Grid */}
+        {/* Main Canvas - Product Grid - Light Glass Panel */}
         <div className={cn(
-          "flex-1 overflow-y-auto p-6 transition-all duration-300 hide-scrollbar",
+          "flex-1 overflow-y-auto px-2 md:px-4 py-4 md:py-6 transition-all duration-300 hide-scrollbar",
           sidebarOpen ? "w-4/5" : "w-full",
           isApplyingFilter ? "opacity-75" : "opacity-100"
         )}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" key={`products-${sortBy || 'none'}-${filteredProducts.length}`}>
+          {/* Glass Container */}
+          <div className="bg-white/80 backdrop-blur-2xl border-2 border-white/70 shadow-2xl rounded-3xl p-6" style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.3)' }}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4" key={`products-${sortBy || 'none'}-${filteredProducts.length}`}>
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl shadow-lg shadow-black/20 p-3 hover:bg-white/15 hover:border-white/30 hover:shadow-xl hover:shadow-cyan-500/10 transition-all"
+                  className="bg-white/90 backdrop-blur-xl border-2 border-white/70 rounded-2xl shadow-lg p-3 hover:bg-white/95 hover:border-[#007185]/50 hover:shadow-xl transition-all"
+                  style={{ boxShadow: '0 4px 20px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.4)' }}
               >
-                <div className="aspect-square mb-2 backdrop-blur-md bg-white/5 rounded-lg overflow-hidden flex items-center justify-center border border-white/10">
+                <div className="aspect-square mb-2 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg overflow-hidden flex items-center justify-center border-2 border-gray-200/50 shadow-inner">
                   <img
                     src={product.image_url}
                     alt={product.name}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain p-3"
+                    loading="lazy"
                     onError={(e) => {
-                      // Use a data URI as fallback to avoid network requests
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
                       const parent = target.parentElement;
                       if (parent && !parent.querySelector('.fallback-placeholder')) {
                         const placeholder = document.createElement('div');
-                        placeholder.className = 'fallback-placeholder w-full h-full flex items-center justify-center text-gray-400 text-xs';
-                        placeholder.textContent = 'No Image';
+                        placeholder.className = 'fallback-placeholder w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300 text-gray-600 text-sm font-medium';
+                        placeholder.textContent = product.name.split(' ')[0];
                         parent.appendChild(placeholder);
                       }
                     }}
                   />
                 </div>
-                <h3 className="font-medium text-xs text-white mb-1 line-clamp-2">
+                <h3 className="font-medium text-xs text-gray-900 mb-1 line-clamp-2">
                   {product.name}
                 </h3>
                 <div className="flex items-center mb-1.5">
-                  <span className="text-yellow-400 text-xs drop-shadow-lg">
+                  <span className="text-yellow-500 text-xs">
                     {'★'.repeat(Math.floor(product.rating))}
                   </span>
-                  <span className="text-xs text-white/70 ml-1">
+                  <span className="text-xs text-gray-500 ml-1">
                     ({product.reviews.toLocaleString()})
                   </span>
                 </div>
                 <div className="flex items-baseline mb-1.5">
-                  <span className="text-base font-bold text-cyan-400 drop-shadow-lg">
+                  <span className="text-base font-bold text-gray-900">
                     {formatPrice(product.price)}
                   </span>
-                  <span className="text-xs text-white/60 ml-1">INR</span>
+                  <span className="text-xs text-gray-500 ml-1">INR</span>
                 </div>
-                <div className="flex items-center text-xs text-purple-300 mb-2">
+                <div className="flex items-center text-xs text-[#007185] mb-2">
                   <span className="font-semibold">Prime</span>
                   <span className="ml-1">✓</span>
                 </div>
@@ -1411,37 +1415,40 @@ export const EcommerceSessionView = ({
                       alert('Error placing order. Please try again.');
                     }
                   }}
-                  className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white font-semibold py-1.5 px-3 rounded-lg text-xs transition-all shadow-lg shadow-cyan-500/50 hover:shadow-xl hover:shadow-cyan-500/70"
+                  className="w-full bg-[#FF9900] hover:bg-[#FF8800] text-white font-semibold py-1.5 px-3 rounded-lg text-xs transition-all shadow-md hover:shadow-lg"
                 >
                   Buy Now
                 </button>
               </div>
             ))}
           </div>
+            </div>
+          
           {filteredProducts.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full min-h-[400px]">
-              <div className="text-center backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-8 shadow-lg">
-                <p className="text-2xl text-white/80 mb-4">📦 No products found</p>
-                <p className="text-white/60 mb-6">
+              <div className="text-center bg-white/90 backdrop-blur-2xl border-2 border-white/60 rounded-2xl p-8 shadow-xl" style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)' }}>
+                <p className="text-2xl text-gray-700 mb-4">📦 No products found</p>
+                <p className="text-gray-600 mb-6">
                   Try adjusting your filters or search terms
                 </p>
                 <button
                   onClick={handleClearAllFilters}
-                  className="px-6 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white rounded-lg transition-all shadow-lg shadow-cyan-500/50 hover:shadow-xl"
+                  className="px-6 py-2 bg-[#FF9900] hover:bg-[#FF8800] text-white rounded-lg transition-all shadow-md hover:shadow-lg"
                 >
                   Clear Filters
                 </button>
             </div>
             </div>
           ) : null}
-            </div>
+        </div>
 
-        {/* Slide-out Drawer - Order History (20%, hidden by default) */}
+        {/* Slide-out Drawer - Order History (20%, hidden by default) - Light Glass Panel */}
         <div
           className={cn(
-            "fixed top-16 right-0 h-[calc(100vh-64px)] w-80 backdrop-blur-2xl bg-white/10 border-l border-white/20 shadow-2xl transform transition-transform duration-300 ease-in-out z-40 overflow-y-auto hide-scrollbar",
+            "fixed top-24 right-4 h-[calc(100vh-104px)] w-80 bg-white/80 backdrop-blur-2xl border-2 border-white/70 rounded-2xl shadow-2xl transform transition-transform duration-300 ease-in-out z-40 overflow-y-auto hide-scrollbar",
             sidebarOpen ? "translate-x-0" : "translate-x-full"
           )}
+          style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6)' }}
         >
           <div className="p-4">
             <div className="flex items-center justify-between mb-4">
@@ -1449,10 +1456,10 @@ export const EcommerceSessionView = ({
                 <button
                   onClick={() => setSidebarView('cart')}
                   className={cn(
-                    "px-3 py-1 text-sm font-medium rounded transition-colors",
+                    "px-3 py-1 text-sm font-medium rounded-lg transition-all",
                     sidebarView === 'cart'
-                      ? "bg-[#FF9900] text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      ? "bg-[#FF9900] text-white shadow-md"
+                      : "bg-white/50 text-gray-700 hover:bg-white/70 border border-[#007185]/20"
                   )}
                 >
                   Cart ({cart.length})
@@ -1460,10 +1467,10 @@ export const EcommerceSessionView = ({
                 <button
                   onClick={() => setSidebarView('orders')}
                   className={cn(
-                    "px-3 py-1 text-sm font-medium rounded transition-colors",
+                    "px-3 py-1 text-sm font-medium rounded-lg transition-all",
                     sidebarView === 'orders'
-                      ? "bg-[#FF9900] text-white"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      ? "bg-[#FF9900] text-white shadow-md"
+                      : "bg-white/50 text-gray-700 hover:bg-white/70 border border-[#007185]/20"
                   )}
                 >
                   Orders ({orders.length})
@@ -1471,7 +1478,7 @@ export const EcommerceSessionView = ({
               </div>
               <button
                 onClick={() => setSidebarOpen(false)}
-                className="text-white/70 hover:text-white backdrop-blur-md bg-white/10 border border-white/20 rounded-lg p-1 transition-all hover:bg-white/20"
+                className="text-gray-600 hover:text-gray-900 bg-white/50 hover:bg-white/70 border border-[#007185]/20 rounded-lg p-1 transition-all"
                 aria-label="Close sidebar"
               >
                 <svg
@@ -1492,7 +1499,7 @@ export const EcommerceSessionView = ({
 
             {sidebarView === 'cart' ? (
               cart.length === 0 ? (
-                <div className="text-sm text-white/60 text-center py-8 backdrop-blur-md bg-white/5 rounded-lg border border-white/10 p-4">
+                <div className="text-sm text-gray-600 text-center py-8 bg-white/50 rounded-lg border border-[#007185]/20 p-4">
                   Your cart is empty. Add items via voice or click "Buy Now"!
                 </div>
               ) : (
@@ -1500,19 +1507,20 @@ export const EcommerceSessionView = ({
                   {cart.map((item, idx) => (
                     <div
                       key={`${item.product_id}-${idx}`}
-                      className="backdrop-blur-xl bg-white/10 rounded-xl p-3 border border-white/20 shadow-lg"
+                      className="bg-white/90 backdrop-blur-xl rounded-xl p-3 border-2 border-white/60 shadow-lg mb-3"
+                      style={{ boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)' }}
                     >
                       <div className="flex items-center justify-between mb-2">
-                        <div className="text-sm font-medium text-white flex-1">
+                        <div className="text-sm font-medium text-gray-900 flex-1">
                           {item.product_name}
                         </div>
                       </div>
                       <div className="flex items-center justify-between mb-2">
-                        <div className="text-xs text-white/70">
+                        <div className="text-xs text-gray-600">
                           {formatPrice(item.unit_amount)} each
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-white/70">Qty:</span>
+                          <span className="text-xs text-gray-600">Qty:</span>
                           <div className="flex items-center gap-1">
                             <button
                               onClick={async () => {
@@ -1554,7 +1562,7 @@ export const EcommerceSessionView = ({
                                 }
                               }}
                               disabled={item.quantity <= 1}
-                              className="w-6 h-6 flex items-center justify-center backdrop-blur-md bg-white/20 border border-white/30 hover:bg-white/30 disabled:opacity-50 disabled:cursor-not-allowed rounded text-white text-sm font-semibold transition-all"
+                              className="w-6 h-6 flex items-center justify-center bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed rounded text-gray-700 text-sm font-semibold transition-all"
                             >
                               −
                             </button>
@@ -1601,7 +1609,7 @@ export const EcommerceSessionView = ({
                                     .catch((err) => console.error('Error fetching cart:', err));
                                 }
                               }}
-                              className="w-12 h-6 text-center text-sm font-medium text-white backdrop-blur-md bg-white/20 border border-white/30 rounded focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                              className="w-12 h-6 text-center text-sm font-medium text-gray-900 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#FF9900] bg-white"
                             />
                             <button
                               onClick={async () => {
@@ -1642,15 +1650,15 @@ export const EcommerceSessionView = ({
                                     .catch((err) => console.error('Error fetching cart:', err));
                                 }
                               }}
-                              className="w-6 h-6 flex items-center justify-center backdrop-blur-md bg-white/20 border border-white/30 hover:bg-white/30 rounded text-white text-sm font-semibold transition-all"
+                              className="w-6 h-6 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded text-gray-700 text-sm font-semibold transition-all"
                             >
                               +
                             </button>
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center justify-between pt-2 border-t border-white/20">
-                        <span className="text-sm font-semibold text-cyan-400">
+                      <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+                        <span className="text-sm font-semibold text-[#007185]">
                           Subtotal: {formatPrice(item.unit_amount * item.quantity)}
                         </span>
                         <button
@@ -1663,7 +1671,7 @@ export const EcommerceSessionView = ({
                               .then((data) => setCart(Array.isArray(data) ? data : []))
                               .catch((err) => console.error('Error fetching cart:', err));
                           }}
-                          className="text-xs text-red-400 hover:text-red-300 hover:underline flex items-center gap-1 transition-colors"
+                          className="text-xs text-red-600 hover:text-red-700 hover:underline flex items-center gap-1 transition-colors"
                           title="Remove item"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1674,9 +1682,9 @@ export const EcommerceSessionView = ({
                       </div>
                     </div>
                   ))}
-                  <div className="mt-4 pt-4 border-t border-white/20">
+                  <div className="mt-4 pt-4 border-t border-gray-200">
                     <div className="flex justify-between items-center mb-3">
-                      <span className="text-lg font-bold text-white">
+                      <span className="text-lg font-bold text-gray-900">
                         Total: {formatPrice(
                           cart.reduce((sum, item) => sum + (item.unit_amount * item.quantity), 0)
                         )}
@@ -1704,7 +1712,7 @@ export const EcommerceSessionView = ({
                           alert('Please use voice to checkout: "Checkout my cart"');
                         }
                       }}
-                      className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-all shadow-lg shadow-cyan-500/50 hover:shadow-xl"
+                      className="w-full bg-[#FF9900] hover:bg-[#FF8800] text-white font-semibold py-2 px-4 rounded-lg text-sm transition-all shadow-md hover:shadow-lg"
                     >
                       Checkout Cart
                     </button>
@@ -1712,7 +1720,7 @@ export const EcommerceSessionView = ({
                 </div>
               )
             ) : orders.length === 0 ? (
-              <div className="text-sm text-white/60 text-center py-8 backdrop-blur-md bg-white/5 rounded-lg border border-white/10 p-4">
+              <div className="text-sm text-gray-600 text-center py-8 bg-white/50 rounded-lg border border-[#007185]/20 p-4">
                 No orders yet. Place an order via voice or click "Buy Now"!
                 </div>
               ) : (
@@ -1720,40 +1728,41 @@ export const EcommerceSessionView = ({
                 {orders.slice().reverse().map((order) => (
                     <div
                       key={order.id}
-                      className="backdrop-blur-xl bg-white/10 rounded-xl p-3 border border-white/20 shadow-lg"
+                      className="bg-white/90 backdrop-blur-xl rounded-xl p-3 border-2 border-white/60 shadow-lg mb-3"
+                      style={{ boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)' }}
                     >
                       <div className="flex justify-between items-start mb-2">
-                        <span className="text-xs font-mono text-white/60">
+                        <span className="text-xs font-mono text-gray-600">
                         Order #{order.id.slice(0, 8)}
                         </span>
                         <span
                           className={cn(
-                            'text-xs px-2 py-1 rounded-lg backdrop-blur-md border',
+                            'text-xs px-2 py-1 rounded-lg border',
                             order.status === 'CONFIRMED'
-                              ? 'bg-green-500/20 border-green-400/50 text-green-300'
-                              : 'bg-yellow-500/20 border-yellow-400/50 text-yellow-300'
+                              ? 'bg-green-100 border-green-300 text-green-800'
+                              : 'bg-yellow-100 border-yellow-300 text-yellow-800'
                           )}
                         >
                           {order.status}
                         </span>
                       </div>
                       {order.items.map((item, idx) => (
-                      <div key={idx} className="mb-2 pb-2 border-b border-white/20 last:border-b-0">
+                      <div key={idx} className="mb-2 pb-2 border-b border-gray-200 last:border-b-0">
                         <div className="flex items-center justify-between mb-1">
-                          <div className="text-sm font-medium text-white flex-1">
+                          <div className="text-sm font-medium text-gray-900 flex-1">
                             {item.product_name}
                           </div>
                           </div>
                         <div className="flex items-center justify-between">
-                          <div className="text-xs text-white/70">
+                          <div className="text-xs text-gray-600">
                             {formatPrice(item.unit_amount)} each
                           </div>
-                          <div className="text-sm font-medium text-white">
+                          <div className="text-sm font-medium text-gray-900">
                             Qty: {item.quantity}
                           </div>
                         </div>
                         <div className="flex items-center justify-between mt-1">
-                          <div className="text-xs text-purple-300">
+                          <div className="text-xs text-[#007185]">
                             Subtotal: {formatPrice(item.unit_amount * item.quantity)}
                           </div>
                           <button
@@ -1783,7 +1792,7 @@ export const EcommerceSessionView = ({
                                 alert('Error removing item. Please try again.');
                               }
                             }}
-                            className="text-xs text-red-400 hover:text-red-300 hover:underline flex items-center gap-1 transition-colors"
+                            className="text-xs text-red-600 hover:text-red-700 hover:underline flex items-center gap-1 transition-colors"
                             title="Remove item"
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1794,15 +1803,15 @@ export const EcommerceSessionView = ({
                           </div>
                         </div>
                       ))}
-                      <div className="flex justify-between items-center mt-2 pt-2 border-t border-white/20">
-                        <span className="text-sm font-semibold text-white">
+                      <div className="flex justify-between items-center mt-2 pt-2 border-t border-gray-200">
+                        <span className="text-sm font-semibold text-gray-900">
                         Total: {formatPrice(
                           order.items.reduce((sum: number, item: any) => 
                             sum + (item.unit_amount * item.quantity), 0
                           )
                         )}
                         </span>
-                        <span className="text-xs text-white/60">
+                        <span className="text-xs text-gray-600">
                           {formatDate(order.created_at)}
                         </span>
                       </div>
@@ -1816,7 +1825,7 @@ export const EcommerceSessionView = ({
         {/* Overlay when sidebar is open (mobile) */}
         {sidebarOpen && (
           <div
-            className="fixed inset-0 backdrop-blur-sm bg-black/30 z-30 md:hidden"
+            className="fixed inset-0 backdrop-blur-sm bg-black/20 z-30 md:hidden"
             onClick={() => setSidebarOpen(false)}
           />
         )}
@@ -1830,9 +1839,9 @@ export const EcommerceSessionView = ({
         {!isSessionActive ? (
           <button
             onClick={onStartCall}
-            className="backdrop-blur-xl bg-gradient-to-r from-cyan-500/80 to-purple-500/80 hover:from-cyan-400 hover:to-purple-400 border border-white/30 text-white font-semibold py-4 px-10 rounded-full text-lg transition-all shadow-2xl flex items-center gap-3 pointer-events-auto transform hover:scale-105 active:scale-95"
+            className="bg-[#FF9900] hover:bg-[#FF8800] text-white font-semibold py-4 px-10 rounded-full text-lg transition-all shadow-2xl flex items-center gap-3 pointer-events-auto transform hover:scale-105 active:scale-95"
             style={{
-              boxShadow: '0 10px 40px rgba(6, 182, 212, 0.4), 0 0 20px rgba(168, 85, 247, 0.3)',
+              boxShadow: '0 10px 40px rgba(255, 153, 0, 0.4)',
             }}
           >
             <svg
@@ -1854,7 +1863,7 @@ export const EcommerceSessionView = ({
           <div className="pointer-events-auto">
             <AgentControlBar 
               controls={controls} 
-              className="backdrop-blur-2xl bg-white/10 border border-white/20 text-white rounded-full px-4 py-3 shadow-2xl"
+              className="bg-white/80 backdrop-blur-xl border border-[#007185]/20 text-gray-900 rounded-full px-4 py-3 shadow-lg"
             />
         </div>
         )}

@@ -23,11 +23,11 @@ const BOTTOM_VIEW_MOTION_PROPS = {
   variants: {
     visible: {
       opacity: 1,
-      translateY: '0%',
+      y: 0,
     },
     hidden: {
       opacity: 0,
-      translateY: '100%',
+      y: '100%',
     },
   },
   initial: 'hidden',
@@ -36,9 +36,9 @@ const BOTTOM_VIEW_MOTION_PROPS = {
   transition: {
     duration: 0.3,
     delay: 0.5,
-    ease: 'easeOut',
+    ease: [0.4, 0, 0.2, 1] as const,
   },
-};
+} as const;
 
 interface FadeProps {
   top?: boolean;

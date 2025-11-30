@@ -11,29 +11,21 @@ const CONTAINER_MOTION_PROPS = {
   variants: {
     hidden: {
       opacity: 0,
-      transition: {
-        ease: 'easeOut',
-        duration: 0.3,
-        staggerChildren: 0.1,
-        staggerDirection: -1,
-      },
     },
     visible: {
       opacity: 1,
-      transition: {
-        delay: 0.2,
-        ease: 'easeOut',
-        duration: 0.3,
-        stagerDelay: 0.2,
-        staggerChildren: 0.1,
-        staggerDirection: 1,
-      },
     },
   },
   initial: 'hidden',
   animate: 'visible',
   exit: 'hidden',
-};
+  transition: {
+    ease: 'easeOut',
+    duration: 0.3,
+    staggerChildren: 0.1,
+    staggerDirection: 1,
+  },
+} as const;
 
 const MESSAGE_MOTION_PROPS = {
   variants: {
