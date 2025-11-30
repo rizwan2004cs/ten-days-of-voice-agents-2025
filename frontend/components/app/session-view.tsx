@@ -1,130 +1,256 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import type { AppConfig } from '@/app-config';
-import { ChatTranscript } from '@/components/app/chat-transcript';
-import { PreConnectMessage } from '@/components/app/preconnect-message';
-import { TileLayout } from '@/components/app/tile-layout';
+import { useRoomContext, useRemoteParticipants } from '@livekit/components-react';
 import {
-  AgentControlBar,
-  type ControlBarControls,
-} from '@/components/livekit/agent-control-bar/agent-control-bar';
+  MicrophoneIcon,
+  MicrophoneSlashIcon,
+  PhoneDisconnectIcon,
+} from '@phosphor-icons/react/dist/ssr';
+import type { AppConfig } from '@/app-config';
 import { useChatMessages } from '@/hooks/useChatMessages';
 import { useConnectionTimeout } from '@/hooks/useConnectionTimout';
 import { useDebugMode } from '@/hooks/useDebug';
 import { cn } from '@/lib/utils';
-import { ScrollArea } from '../livekit/scroll-area/scroll-area';
-
-const MotionBottom = motion.create('div');
 
 const IN_DEVELOPMENT = process.env.NODE_ENV !== 'production';
-const BOTTOM_VIEW_MOTION_PROPS = {
-  variants: {
-    visible: {
-      opacity: 1,
-      translateY: '0%',
-    },
-    hidden: {
-      opacity: 0,
-      translateY: '100%',
-    },
-  },
-  initial: 'hidden',
-  animate: 'visible',
-  exit: 'hidden',
-  transition: {
-    duration: 0.3,
-    delay: 0.5,
-    ease: 'easeOut',
-  },
-};
 
-interface FadeProps {
-  top?: boolean;
-  bottom?: boolean;
-  className?: string;
-}
-
-export function Fade({ top = false, bottom = false, className }: FadeProps) {
-  return (
-    <div
-      className={cn(
-        'from-background pointer-events-none h-4 bg-linear-to-b to-transparent',
-        top && 'bg-linear-to-b',
-        bottom && 'bg-linear-to-t',
-        className
-      )}
-    />
-  );
-}
 interface SessionViewProps {
   appConfig: AppConfig;
+  onAnimationComplete?: () => void;
 }
 
-export const SessionView = ({
-  appConfig,
-  ...props
-}: React.ComponentProps<'section'> & SessionViewProps) => {
+export const SessionView = ({ appConfig, onAnimationComplete }: SessionViewProps) => {
   useConnectionTimeout(200_000);
   useDebugMode({ enabled: IN_DEVELOPMENT });
 
+  const room = useRoomContext();
   const messages = useChatMessages();
-  const [chatOpen, setChatOpen] = useState(false);
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const participants = useRemoteParticipants();
+  const transcriptRef = useRef<HTMLDivElement>(null);
+  const [isMuted, setIsMuted] = useState(false);
+  const [gamePhase, setGamePhase] = useState<'intro' | 'awaiting_improv' | 'reacting' | 'done'>('intro');
+  const [currentRound, setCurrentRound] = useState(0);
+  const [maxRounds] = useState(3);
+  const [currentScenario, setCurrentScenario] = useState<string | null>(null);
+  const [isHostSpeaking, setIsHostSpeaking] = useState(false);
 
-  const controls: ControlBarControls = {
-    leave: true,
-    microphone: true,
-    chat: appConfig.supportsChatInput,
-    camera: appConfig.supportsVideoInput,
-    screenShare: appConfig.supportsVideoInput,
-  };
-
+  // Check if host is speaking (agent participant)
+  const agentParticipant = participants.find((p) => p.isAgent);
   useEffect(() => {
-    const lastMessage = messages.at(-1);
-    const lastMessageIsLocal = lastMessage?.from?.isLocal === true;
+    if (agentParticipant && agentParticipant.audioTracks) {
+      const audioTracks = Array.from(agentParticipant.audioTracks.values());
+      const hasActiveAudio = audioTracks.some(
+        (track) => track.track && track.track.mediaStreamTrack && track.track.mediaStreamTrack.readyState === 'live'
+      );
+      setIsHostSpeaking(hasActiveAudio);
+    } else {
+      setIsHostSpeaking(false);
+    }
+  }, [agentParticipant, messages]);
 
-    if (scrollAreaRef.current && lastMessageIsLocal) {
-      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
+  // Auto-scroll transcript
+  useEffect(() => {
+    if (transcriptRef.current) {
+      transcriptRef.current.scrollTop = transcriptRef.current.scrollHeight;
     }
   }, [messages]);
 
+  // Parse game state from messages (simplified - in production, use data messages)
+  useEffect(() => {
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage && !lastMessage.from?.isLocal) {
+      const text = lastMessage.message.toLowerCase();
+      // Extract round number more reliably
+      if (text.includes('round') && text.includes('of')) {
+        // Try multiple patterns to catch "Round 1 of 3", "round 2", etc.
+        const roundMatch = text.match(/round\s+(\d+)\s+of\s+(\d+)/i) || text.match(/round\s+(\d+)/i);
+        if (roundMatch) {
+          const roundNum = parseInt(roundMatch[1]);
+          if (roundNum >= 1 && roundNum <= 3) {
+            setCurrentRound(roundNum);
+          }
+        }
+      }
+      if (text.includes('scenario') || text.includes('you are')) {
+        setCurrentScenario(lastMessage.message);
+        setGamePhase('awaiting_improv');
+      }
+      if (text.includes('that was') || text.includes('great') || text.includes('interesting') || text.includes('unique')) {
+        setGamePhase('reacting');
+      }
+      // Detect closing summary
+      if (text.includes('thank you for playing') || text.includes('end of our three rounds') || text.includes('closing summary')) {
+        setGamePhase('done');
+      }
+    }
+  }, [messages]);
+
+  const toggleMute = async () => {
+    const enabled = !isMuted;
+    await room.localParticipant.setMicrophoneEnabled(enabled);
+    setIsMuted(!enabled);
+  };
+
+  const handleLeave = () => {
+    room.disconnect();
+    if (onAnimationComplete) {
+      onAnimationComplete();
+    }
+  };
+
+  const getPhaseLabel = () => {
+    switch (gamePhase) {
+      case 'intro':
+        return 'Intro';
+      case 'awaiting_improv':
+        return 'Playing scene';
+      case 'reacting':
+        return 'Host reacting';
+      case 'done':
+        return 'Summary';
+      default:
+        return 'In game';
+    }
+  };
+
   return (
-    <section className="bg-background relative z-10 h-full w-full overflow-hidden" {...props}>
-      {/* Chat Transcript */}
-      <div
-        className={cn(
-          'fixed inset-0 grid grid-cols-1 grid-rows-1',
-          !chatOpen && 'pointer-events-none'
-        )}
-      >
-        <Fade top className="absolute inset-x-4 top-0 h-40" />
-        <ScrollArea ref={scrollAreaRef} className="px-4 pt-40 pb-[150px] md:px-6 md:pb-[180px]">
-          <ChatTranscript
-            hidden={!chatOpen}
-            messages={messages}
-            className="mx-auto max-w-2xl space-y-3 transition-opacity duration-300 ease-out"
-          />
-        </ScrollArea>
-      </div>
+    <div className="relative h-screen w-full overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(139,92,246,0.2),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.15),transparent_50%)]" />
 
-      {/* Tile Layout */}
-      <TileLayout chatOpen={chatOpen} />
+      <div className="relative z-10 flex h-full flex-col">
+        {/* Stage Panel */}
+        <div className="border-b border-white/10 bg-white/5 backdrop-blur-sm">
+          <div className="mx-auto max-w-7xl px-6 py-6">
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <div className="mb-2 flex items-center gap-3">
+                  <span className="inline-flex items-center rounded-full bg-purple-500/20 px-3 py-1 text-xs font-semibold text-purple-300">
+                    LIVE
+                  </span>
+                  <span className="text-sm font-medium text-white/60">{getPhaseLabel()}</span>
+                </div>
+                <h2 className="mb-1 text-2xl font-bold text-white">
+                  {currentRound > 0 ? `Round ${currentRound} of ${maxRounds}` : 'Improv Battle'}
+                </h2>
+                {currentScenario && (
+                  <p className="text-sm text-white/80 line-clamp-2">{currentScenario}</p>
+                )}
+              </div>
 
-      {/* Bottom */}
-      <MotionBottom
-        {...BOTTOM_VIEW_MOTION_PROPS}
-        className="fixed inset-x-3 bottom-0 z-50 md:inset-x-12"
-      >
-        {appConfig.isPreConnectBufferEnabled && (
-          <PreConnectMessage messages={messages} className="pb-4" />
-        )}
-        <div className="bg-background relative mx-auto max-w-2xl pb-3 md:pb-12">
-          <Fade bottom className="absolute inset-x-0 top-0 h-4 -translate-y-full" />
-          <AgentControlBar controls={controls} onChatOpenChange={setChatOpen} />
+              {/* Host speaking indicator */}
+              <div className="flex items-center gap-2">
+                {isHostSpeaking && (
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ repeat: Infinity, duration: 1.5 }}
+                    className="flex items-center gap-2 rounded-full bg-purple-500/20 px-4 py-2"
+                  >
+                    <div className="h-2 w-2 rounded-full bg-purple-400" />
+                    <span className="text-xs font-medium text-purple-300">Host speaking</span>
+                  </motion.div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-      </MotionBottom>
-    </section>
+
+        {/* Main Content Area */}
+        <div className="flex flex-1 overflow-hidden">
+          {/* Transcript Panel */}
+          <div className="flex-1 overflow-y-auto px-6 py-6">
+            <div ref={transcriptRef} className="mx-auto max-w-3xl space-y-4">
+              {messages.length === 0 ? (
+                <div className="flex h-full items-center justify-center">
+                  <p className="text-white/40">Waiting for the show to begin...</p>
+                </div>
+              ) : (
+                messages.map((message) => {
+                  const isLocal = message.from?.isLocal ?? false;
+                  const isHost = !isLocal && message.from?.isAgent;
+
+                  return (
+                    <motion.div
+                      key={message.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={cn(
+                        'flex',
+                        isLocal ? 'justify-end' : 'justify-start'
+                      )}
+                    >
+                      <div
+                        className={cn(
+                          'max-w-[80%] rounded-2xl px-4 py-3',
+                          isHost
+                            ? 'bg-purple-500/20 text-white'
+                            : isLocal
+                            ? 'bg-blue-500/20 text-white'
+                            : 'bg-white/10 text-white/90'
+                        )}
+                      >
+                        <div className="mb-1 text-xs font-semibold opacity-70">
+                          {isHost ? 'Host' : isLocal ? 'You' : 'Player'}
+                        </div>
+                        <div className="text-sm leading-relaxed">{message.message}</div>
+                      </div>
+                    </motion.div>
+                  );
+                })
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Custom Control Bar */}
+        <div className="border-t border-white/10 bg-white/5 backdrop-blur-sm">
+          <div className="mx-auto max-w-7xl px-6 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                {/* Status Chip */}
+                <div className="rounded-full bg-white/10 px-4 py-2">
+                  <span className="text-xs font-medium text-white/80">{getPhaseLabel()}</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                {/* Mic Toggle */}
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={toggleMute}
+                  className={cn(
+                    'flex h-12 w-12 items-center justify-center rounded-full transition-all',
+                    isMuted
+                      ? 'bg-red-500/20 text-red-400 hover:bg-red-500/30'
+                      : 'bg-white/10 text-white hover:bg-white/20'
+                  )}
+                >
+                  {isMuted ? (
+                    <MicrophoneSlashIcon size={20} weight="fill" />
+                  ) : (
+                    <MicrophoneIcon size={20} weight="fill" />
+                  )}
+                </motion.button>
+
+                {/* Leave Button */}
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleLeave}
+                  className="flex h-12 items-center gap-2 rounded-full bg-red-500/20 px-6 text-red-400 transition-all hover:bg-red-500/30"
+                >
+                  <PhoneDisconnectIcon size={20} weight="fill" />
+                  <span className="text-sm font-medium">Leave</span>
+                </motion.button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };

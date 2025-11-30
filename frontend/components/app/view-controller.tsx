@@ -43,6 +43,14 @@ export function ViewController() {
     }
   };
 
+  const handleStartCall = (playerName: string) => {
+    // Store player name in session storage for backend access
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('playerName', playerName);
+    }
+    startSession();
+  };
+
   return (
     <AnimatePresence mode="wait">
       {/* Welcome screen */}
@@ -50,8 +58,7 @@ export function ViewController() {
         <MotionWelcomeView
           key="welcome"
           {...VIEW_MOTION_PROPS}
-          startButtonText={appConfig.startButtonText}
-          onStartCall={startSession}
+          onStartCall={handleStartCall}
         />
       )}
       {/* Session view */}
